@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="ProdazhaBiletov.AfishaPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             FontFamily="{StaticResource BaseFont}" FontSize="14">
+    <Grid Margin="20,16,20,12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="16"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Style="{StaticResource Card}" Padding="16">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Поиск" Style="{StaticResource BlockTitle}" Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Найти по названию" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="tbSearch" Style="{StaticResource FieldBox}" Margin="0,0,0,12"
+                             TextChanged="tbSearch_TextChanged"/>
+
+                    <TextBlock Text="Тип мероприятия" Style="{StaticResource FieldLabel}"/>
+                    <StackPanel x:Name="panelTipi" Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Дата с" Style="{StaticResource FieldLabel}"/>
+                    <DatePicker x:Name="dpFrom" Style="{StaticResource DateField}" Margin="0,0,0,8"
+                                SelectedDateChanged="filter_Changed"/>
+                    <TextBlock Text="Дата по" Style="{StaticResource FieldLabel}"/>
+                    <DatePicker x:Name="dpTo" Style="{StaticResource DateField}" Margin="0,0,0,12"
+                                SelectedDateChanged="filter_Changed"/>
+
+                    <TextBlock Text="Город" Style="{StaticResource FieldLabel}"/>
+                    <ComboBox x:Name="cbGorod" Style="{StaticResource DropDown}" Margin="0,0,0,12"
+                              SelectionChanged="filter_Changed"/>
+
+                    <TextBlock Text="Площадка" Style="{StaticResource FieldLabel}"/>
+                    <ComboBox x:Name="cbPloshchadka" Style="{StaticResource DropDown}" Margin="0,0,0,12"
+                              SelectionChanged="filter_Changed"/>
+
+                    <TextBlock Text="Цена от / до, руб." Style="{StaticResource FieldLabel}"/>
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="tbPriceFrom" Grid.Column="0" Style="{StaticResource FieldBox}"
+                                 TextChanged="filter_Changed"/>
+                        <TextBox x:Name="tbPriceTo" Grid.Column="2" Style="{StaticResource FieldBox}"
+                                 TextChanged="filter_Changed"/>
+                    </Grid>
+
+                    <Button Content="Показать" Style="{StaticResource MainButton}" Margin="0,0,0,8" Click="btnShow_Click"/>
+                    <Button Content="Сбросить" Style="{StaticResource GhostButton}" Click="btnReset_Click"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,0,0,10">
+                <TextBlock Text="Ближайшие мероприятия" Style="{StaticResource PageTitle}" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="Сортировка:" Style="{StaticResource CaptionText}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <ComboBox x:Name="cbSort" Style="{StaticResource DropDown}" Width="200" SelectionChanged="cbSort_SelectionChanged">
+                        <ComboBoxItem Content="сначала ближайшие"/>
+                        <ComboBoxItem Content="сначала дешевле"/>
+                        <ComboBoxItem Content="сначала дороже"/>
+                        <ComboBoxItem Content="по названию"/>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock x:Name="tbCount" Grid.Row="1" Style="{StaticResource CaptionText}" Margin="0,0,0,10"/>
+
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="listMeropriyatiya">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource Card}" Margin="0,0,0,10" Padding="16" Cursor="Hand"
+                                    MouseLeftButtonUp="Card_Click">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0">
+                                        <Border Background="{StaticResource LightFillBrush}" CornerRadius="3"
+                                                Padding="8,3" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                            <TextBlock Text="{Binding NazvanieTipa}" FontSize="12"
+                                                       Foreground="{StaticResource MainBrush}"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding Nazvanie}" FontSize="16" FontWeight="SemiBold"
+                                                   FontFamily="{StaticResource HeadFont}" Foreground="{StaticResource MainBrush}"
+                                                   TextWrapping="Wrap"/>
+                                        <TextBlock Margin="0,6,0,0" FontSize="13" Foreground="{StaticResource MutedBrush}">
+                                            <Run Text="{Binding DataVremyaNachala, StringFormat={}{0:dd.MM.yyyy HH:mm}, Mode=OneWay}"/>
+                                            <Run Text="  •  "/>
+                                            <Run Text="{Binding NazvaniePloshchadki, Mode=OneWay}"/>
+                                            <Run Text=", "/>
+                                            <Run Text="{Binding Gorod, Mode=OneWay}"/>
+                                        </TextBlock>
+                                        <TextBlock Margin="0,4,0,0" FontSize="12" Foreground="{StaticResource MutedBrush}">
+                                            <Run Text="Продолжительность: "/>
+                                            <Run Text="{Binding Prodolzhitelnost, Mode=OneWay}"/>
+                                            <Run Text=" мин.  •  "/>
+                                            <Run Text="Возраст: "/>
+                                            <Run Text="{Binding VozrastnoeOgranichenie, Mode=OneWay}"/>
+                                            <Run Text="+"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0,16,0" MinWidth="130">
+                                        <TextBlock FontSize="16" FontWeight="Bold" FontFamily="{StaticResource MonoFont}"
+                                                   Foreground="{StaticResource TextBrush}" HorizontalAlignment="Right">
+                                            <Run Text="от "/>
+                                            <Run Text="{Binding MinCena, StringFormat={}{0:N0}, Mode=OneWay}"/>
+                                            <Run Text=" руб."/>
+                                        </TextBlock>
+                                        <TextBlock Margin="0,4,0,0" FontSize="12" HorizontalAlignment="Right">
+                                            <Run Text="свободно: " Foreground="{StaticResource MutedBrush}"/>
+                                            <Run Text="{Binding SvobodnoMest, Mode=OneWay}" FontWeight="SemiBold"
+                                                 Foreground="{StaticResource SuccessBrush}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <Button Grid.Column="2" Content="Подробнее" Style="{StaticResource AccentButton}"
+                                            Width="120" VerticalAlignment="Center" Tag="{Binding}"
+                                            Click="btnDetails_Click"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <TextBlock x:Name="tbEmpty" Grid.Row="2" Text="Мероприятия не найдены" Style="{StaticResource BodyText}"
+                       Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Visibility="Collapsed"/>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,0">
+                <Button x:Name="btnPrev" Content="‹" Style="{StaticResource PageButton}" Click="btnPrev_Click"/>
+                <StackPanel x:Name="panelPages" Orientation="Horizontal"/>
+                <Button x:Name="btnNext" Content="›" Style="{StaticResource PageButton}" Click="btnNext_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

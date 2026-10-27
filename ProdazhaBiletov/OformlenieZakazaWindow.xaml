@@ -1,0 +1,205 @@
+﻿<Window x:Class="ProdazhaBiletov.OformlenieZakazaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Оформление заказа" Height="820" Width="1250" MinHeight="700" MinWidth="1050"
+        WindowStartupLocation="CenterOwner" ResizeMode="CanResize" Loaded="Window_Loaded"
+        Background="{StaticResource PageBrush}" FontFamily="{StaticResource BaseFont}">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource Card}" Padding="20,16" Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Style="{StaticResource StepDoneDot}">
+                        <TextBlock Text="✓" Foreground="White" FontSize="15" FontWeight="Bold"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="Выбор мест" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <Border Grid.Column="1" Style="{StaticResource StepConnector}" VerticalAlignment="Center" Margin="12,0"/>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Style="{StaticResource StepCurrentDot}">
+                        <TextBlock Text="2" Foreground="White" FontSize="13" FontWeight="Bold"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="Данные и оплата" Margin="10,0,0,0" VerticalAlignment="Center"
+                               FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource MainBrush}"/>
+                </StackPanel>
+
+                <Border Grid.Column="3" Style="{StaticResource StepConnector}" VerticalAlignment="Center" Margin="12,0"/>
+
+                <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Style="{StaticResource StepNextDot}">
+                        <TextBlock Text="3" Foreground="{StaticResource MutedBrush}" FontSize="13"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="Билет" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="13"
+                               Foreground="{StaticResource MutedBrush}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="340"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Border Style="{StaticResource Card}" Padding="20" Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="Мероприятие и оплата" Style="{StaticResource BlockTitle}" Margin="0,0,0,4"/>
+                            <TextBlock x:Name="tbMeropriyatie" Style="{StaticResource BodyText}" TextWrapping="Wrap"/>
+                            <TextBlock x:Name="tbData" Style="{StaticResource CaptionText}" Margin="0,2,0,0"/>
+                            <TextBlock Text="Выбранные места относятся только к этому мероприятию" Style="{StaticResource CaptionText}"
+                                       Foreground="{StaticResource MainBrush}" Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="bdPokupatel" Style="{StaticResource Card}" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="Данные покупателя" Style="{StaticResource BlockTitle}" Margin="0,0,0,4"/>
+                            <TextBlock Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,0,0,14"
+                                       Text="Поля заполнены из вашего профиля, их можно изменить."/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="12"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,12">
+                                    <TextBlock Text="Фамилия *" Style="{StaticResource FieldLabel}"/>
+                                    <TextBox x:Name="tbFamiliya" Style="{StaticResource FieldBox}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,12">
+                                    <TextBlock Text="Имя *" Style="{StaticResource FieldLabel}"/>
+                                    <TextBox x:Name="tbImya" Style="{StaticResource FieldBox}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
+                                    <TextBlock Text="Электронная почта *" Style="{StaticResource FieldLabel}"/>
+                                    <TextBox x:Name="tbEmail" Style="{StaticResource FieldBox}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,12">
+                                    <TextBlock Text="Телефон *" Style="{StaticResource FieldLabel}"/>
+                                    <TextBox x:Name="tbTelefon" Style="{StaticResource FieldBox}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                                    <TextBlock Text="Отчество" Style="{StaticResource FieldLabel}"/>
+                                    <TextBox x:Name="tbOtchestvo" Style="{StaticResource FieldBox}"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Card}" Padding="20" Margin="0,16,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Способ оплаты" Style="{StaticResource BlockTitle}" Margin="0,0,0,10"/>
+
+                            <RadioButton x:Name="rbCard" GroupName="Oplata" Style="{StaticResource RadioFont}"
+                                         IsChecked="True" Content="Банковская карта" Margin="0,0,0,6"
+                                         Checked="rbOplata_Changed"/>
+                            <RadioButton x:Name="rbSbp" GroupName="Oplata" Style="{StaticResource RadioFont}"
+                                         Content="Система быстрых платежей (СБП)" Margin="0,0,0,6"
+                                         Checked="rbOplata_Changed"/>
+                            <RadioButton x:Name="rbCash" GroupName="Oplata" Style="{StaticResource RadioFont}"
+                                         Content="Наличными в кассе" Checked="rbOplata_Changed"/>
+
+                            <Border x:Name="bdRekvizity" Style="{StaticResource Card}" Background="{StaticResource PageBrush}"
+                                    Padding="14" Margin="0,12,0,0">
+                                <StackPanel>
+                                    <TextBlock x:Name="tbRekvizity" Style="{StaticResource CaptionText}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Style="{StaticResource Card}" Padding="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Состав заказа" Style="{StaticResource BlockTitle}" Margin="16,16,16,10"/>
+
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl x:Name="panelSostav">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="16,0,16,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{Binding Adres}" Style="{StaticResource BodyText}" FontSize="13"/>
+                                                <TextBlock Text="{Binding Kategoriya}" Style="{StaticResource CaptionText}"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Text="{Binding CenaText}" Style="{StaticResource MonoText}"
+                                                       VerticalAlignment="Center" Foreground="{StaticResource TextBrush}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Style="{StaticResource Card}" Padding="16" Margin="0,12,0,0">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock x:Name="tbCount" Style="{StaticResource CaptionText}"/>
+                            <TextBlock x:Name="tbSumma" HorizontalAlignment="Right" Style="{StaticResource MonoText}"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,14">
+                            <TextBlock Text="К оплате" Style="{StaticResource BodyText}" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="tbItogo" HorizontalAlignment="Right" Text="0 ₽" FontSize="22" FontWeight="Bold"
+                                       FontFamily="{StaticResource HeadFont}" Foreground="{StaticResource MainBrush}"/>
+                        </Grid>
+
+                        <CheckBox x:Name="cbSoglasie" Style="{StaticResource CheckBoxFont}" Margin="0,0,0,12"
+                                  Content="Я согласен с условиями продажи и возврата билетов"
+                                  Checked="cbSoglasie_Changed" Unchecked="cbSoglasie_Changed"/>
+
+                        <Button x:Name="btnPay" Content="Перейти к оплате" Style="{StaticResource AccentButton}"
+                                IsEnabled="False" Click="btnPay_Click" Margin="0,0,0,8"/>
+                        <Button Content="Назад к выбору мест" Style="{StaticResource GhostButton}" Click="btnBack_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

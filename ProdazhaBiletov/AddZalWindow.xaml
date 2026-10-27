@@ -1,0 +1,34 @@
+﻿<Window x:Class="ProdazhaBiletov.AddZalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Новый зал" Height="380" Width="560" MinHeight="340" MinWidth="500" ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource PageBrush}"
+        FontFamily="{StaticResource BaseFont}" FontSize="14">
+    <Grid Margin="24,20,24,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Новый зал" Style="{StaticResource PageTitle}" Margin="0,0,0,16"/>
+
+            <TextBlock Text="Название зала *" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="tbNazvanie" Style="{StaticResource FieldBox}" Margin="0,0,0,12"/>
+
+            <TextBlock Text="Площадка *" Style="{StaticResource FieldLabel}"/>
+            <ComboBox x:Name="cbPloshchadka" Style="{StaticResource DropDown}" Margin="0,0,0,12"/>
+
+            <TextBlock Text="Вместимость *" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="tbVmestimost" Style="{StaticResource FieldBox}" Text="100" Margin="0,0,0,12"/>
+
+            <CheckBox x:Name="cbShema" Content="Использовать схему мест (с выбором мест клиентом)"
+                      Style="{StaticResource CheckBoxFont}" IsChecked="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Сохранить" Style="{StaticResource AccentButton}" Width="130" Click="btnSave_Click"/>
+            <Button Content="Отмена" Style="{StaticResource GhostButton}" Width="110" Margin="10,0,0,0" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

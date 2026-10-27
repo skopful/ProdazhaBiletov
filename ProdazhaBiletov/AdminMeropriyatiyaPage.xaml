@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="ProdazhaBiletov.AdminMeropriyatiyaPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="20,16,20,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Справочник мероприятий" Style="{StaticResource PageTitle}" VerticalAlignment="Center"/>
+            <Button Content="Добавить мероприятие" Style="{StaticResource AccentButton}" Width="200"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnAdd_Click"/>
+        </Grid>
+
+        <Border Grid.Row="1" Style="{StaticResource Card}" Padding="10" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="tbSearch" Style="{StaticResource FieldBox}" Width="220" Margin="0,0,12,0"
+                         TextChanged="tbSearch_TextChanged"/>
+                <ComboBox x:Name="cbTip" Style="{StaticResource DropDown}" Width="160" Margin="0,0,12,0" SelectionChanged="FilterChanged"/>
+                <ComboBox x:Name="cbZal" Style="{StaticResource DropDown}" Width="180" Margin="0,0,12,0" SelectionChanged="FilterChanged"/>
+                <ComboBox x:Name="cbStatus" Style="{StaticResource DropDown}" Width="160" Margin="0,0,12,0" SelectionChanged="FilterChanged"/>
+                <Button Content="Сбросить" Style="{StaticResource GhostButton}" Click="btnReset_Click"/>
+            </StackPanel>
+        </Border>
+
+        <DataGrid x:Name="dgMer" Grid.Row="2" Style="{StaticResource DataTableStyle}" ColumnHeaderStyle="{StaticResource TableHeaderStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding idMeropriyatiya}" Width="50" ElementStyle="{StaticResource MonoText}"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Nazvanie}" Width="2*"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding NazvanieTipa}" Width="110"/>
+                <DataGridTextColumn Header="Дата и время" Binding="{Binding DataVremyaNachala, StringFormat={}{0:dd.MM.yyyy HH:mm}}"
+                                    Width="145" ElementStyle="{StaticResource MonoText}"/>
+                <DataGridTextColumn Header="Зал" Binding="{Binding NazvanieZala}" Width="150"/>
+                <DataGridTextColumn Header="Цены" Width="150" ElementStyle="{StaticResource MonoText}">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0:N0} – {1:N0}">
+                            <Binding Path="MinCena"/>
+                            <Binding Path="MaxCena"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Продано" Binding="{Binding Prodano}" Width="85"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding StatusPublikacii}" Width="130"/>
+                <DataGridTemplateColumn Header="Действия" Width="240">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Изм." Style="{StaticResource LinkButton}" Tag="{Binding}" Click="btnEdit_Click"/>
+                                <Button Content="Копия" Style="{StaticResource LinkButton}" Tag="{Binding}" Click="btnCopy_Click"/>
+                                <Button Content="Удал." Style="{StaticResource LinkButton}" Foreground="{StaticResource ErrorBrush}" Tag="{Binding}" Click="btnDelete_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

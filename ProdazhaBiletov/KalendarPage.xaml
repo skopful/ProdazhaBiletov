@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="ProdazhaBiletov.KalendarPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="20,16,20,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Календарь мероприятий" Style="{StaticResource PageTitle}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <DatePicker x:Name="dpKalendarFrom" Style="{StaticResource DateField}" Width="160"
+                            SelectedDateChanged="DatesChanged"/>
+                <TextBlock Text="–" Margin="8,0" VerticalAlignment="Center"/>
+                <DatePicker x:Name="dpKalendarTo" Style="{StaticResource DateField}" Width="160"
+                            SelectedDateChanged="DatesChanged"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock x:Name="tbCountK" Grid.Row="1" Style="{StaticResource CaptionText}" Margin="0,0,0,10"/>
+
+        <DataGrid x:Name="dgKalendar" Grid.Row="2" Style="{StaticResource DataTableStyle}" ColumnHeaderStyle="{StaticResource TableHeaderStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата и время" Binding="{Binding DataVremyaNachala, StringFormat={}{0:dd.MM.yyyy HH:mm}}"
+                                    Width="160" ElementStyle="{StaticResource MonoText}"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding NazvanieTipa}" Width="140"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Nazvanie}" Width="*"/>
+                <DataGridTextColumn Header="Площадка" Binding="{Binding NazvaniePloshchadki}" Width="220"/>
+                <DataGridTextColumn Header="Город" Binding="{Binding NazvanieGoroda}" Width="120"/>
+                <DataGridTextColumn Header="Мин. цена" Binding="{Binding MinCena, StringFormat={}{0:N0} ₽}" Width="130"
+                                    ElementStyle="{StaticResource MonoText}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

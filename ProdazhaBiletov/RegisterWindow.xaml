@@ -1,0 +1,74 @@
+﻿<Window x:Class="ProdazhaBiletov.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Регистрация" Height="760" Width="620" MinHeight="680" MinWidth="580" ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource PageBrush}"
+        FontFamily="{StaticResource BaseFont}" FontSize="14">
+    <Grid Margin="30,24,30,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="Регистрация" Style="{StaticResource PageTitle}" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                <TextBlock Text="Заполните поля, отмеченные звёздочкой" Style="{StaticResource CaptionText}"
+                           HorizontalAlignment="Center" Margin="0,0,0,18"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Фамилия *" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="tbFamiliya" Style="{StaticResource FieldBox}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Имя *" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="tbImya" Style="{StaticResource FieldBox}"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="Отчество" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="tbOtchestvo" Style="{StaticResource FieldBox}" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Электронная почта *" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="tbEmail" Style="{StaticResource FieldBox}" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Телефон *" Style="{StaticResource FieldLabel}"/>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="+7" Style="{StaticResource FieldPrefix}"/>
+                    <TextBox x:Name="tbTelefon" Grid.Column="1" Style="{StaticResource FieldBox}" MaxLength="10"/>
+                </Grid>
+
+                <TextBlock Text="Пароль *" Style="{StaticResource FieldLabel}"/>
+                <PasswordBox x:Name="pbPassword" Style="{StaticResource FieldBoxPass}" Margin="0,0,0,4"/>
+                <TextBlock Text="Не менее 8 символов, латинские буквы и цифры" Style="{StaticResource CaptionText}" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Повторите пароль *" Style="{StaticResource FieldLabel}"/>
+                <PasswordBox x:Name="pbPassword2" Style="{StaticResource FieldBoxPass}" Margin="0,0,0,4"/>
+
+                <CheckBox x:Name="cbAgreement" Style="{StaticResource CheckBoxFont}" Margin="0,8,0,0"
+                          Content="Согласен на обработку персональных данных *" IsChecked="False"/>
+
+                <TextBlock x:Name="tbError" Style="{StaticResource ErrorText}" Margin="0,8,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1">
+            <Button x:Name="btnRegister" Content="Зарегистрироваться" Style="{StaticResource AccentButton}"
+                    Click="btnRegister_Click"/>
+            <TextBlock Margin="0,14,0,0" HorizontalAlignment="Center" FontSize="13" Foreground="{StaticResource MutedBrush}">
+                <Run Text="Уже есть аккаунт?"/>
+                <Hyperlink Foreground="{StaticResource MainBrush}" Click="Login_Click">Войти</Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

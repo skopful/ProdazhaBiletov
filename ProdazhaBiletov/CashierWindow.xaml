@@ -1,0 +1,44 @@
+﻿<Window x:Class="ProdazhaBiletov.CashierWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Рабочее место кассира" Height="820" Width="1400" MinHeight="700" MinWidth="1200"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource PageBrush}"
+        FontFamily="{StaticResource BaseFont}" FontSize="14" Language="ru-RU">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="{StaticResource MainBrush}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="0,18,0,0">
+                    <TextBlock Text="Кассир" Margin="18,0,0,4" FontFamily="{StaticResource HeadFont}"
+                               FontSize="17" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock x:Name="tbCashierUser" Margin="18,0,0,18" FontSize="12" Foreground="#A9B4D4"/>
+                </StackPanel>
+
+                <TextBlock DockPanel.Dock="Top" Text="ПРОДАЖИ" Margin="18,0,0,4"
+                           FontSize="11" FontWeight="SemiBold" Foreground="#8C99BF"/>
+                <StackPanel DockPanel.Dock="Top">
+                    <RadioButton x:Name="navProdazha" GroupName="CashierNav" Content="Продажа билетов" Style="{StaticResource MenuItemStyle}"
+                                 IsChecked="True" Checked="navProdazha_Checked"/>
+                    <RadioButton x:Name="navZakazy" GroupName="CashierNav" Content="Заказы" Style="{StaticResource MenuItemStyle}"
+                                 Checked="navZakazy_Checked"/>
+                </StackPanel>
+
+                <TextBlock DockPanel.Dock="Top" Text="СМЕНА" Margin="18,18,0,4"
+                           FontSize="11" FontWeight="SemiBold" Foreground="#8C99BF"/>
+                <StackPanel DockPanel.Dock="Top">
+                    <RadioButton x:Name="navSmena" GroupName="CashierNav" Content="Моя смена" Style="{StaticResource MenuItemStyle}"
+                                 Checked="navSmena_Checked"/>
+                </StackPanel>
+
+                <Button DockPanel.Dock="Bottom" Content="Закрыть" Style="{StaticResource LinkButton}" Foreground="White"
+                        Margin="8,0,8,14" Click="btnCloseCashier_Click"/>
+            </DockPanel>
+        </Border>
+
+        <ContentControl x:Name="cashierHost" Grid.Column="1"/>
+    </Grid>
+</Window>

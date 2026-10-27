@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="ProdazhaBiletov.SeatMapControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             FontFamily="{StaticResource BaseFont}">
+
+    <Border Style="{StaticResource Card}" Padding="18">
+        <StackPanel>
+
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <TextBlock Text="Схема зала" Style="{StaticResource BlockTitle}"/>
+                    <TextBlock x:Name="tbZalName" Style="{StaticResource CaptionText}"
+                               Margin="0,3,0,0" Text="Отдельная схема выбранного мероприятия"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock x:Name="tbCounter" Style="{StaticResource CaptionText}"/>
+                </StackPanel>
+            </Grid>
+
+            <Border Style="{StaticResource StageLabel}">
+                <TextBlock Text="СЦЕНА" Style="{StaticResource SeatLabel}"/>
+            </Border>
+
+            <Border Height="10" Margin="0,0,0,10" Background="{StaticResource AisleBrush}" CornerRadius="2"/>
+
+            <ScrollViewer x:Name="scrollSeats" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel x:Name="panelRyady" HorizontalAlignment="Center"/>
+            </ScrollViewer>
+
+            <TextBlock x:Name="tbEmpty" Text="Схема зала для этого мероприятия не создана"
+                       Style="{StaticResource CaptionText}" HorizontalAlignment="Center" Margin="0,20,0,20"
+                       Visibility="Collapsed"/>
+
+            <Border Style="{StaticResource Card}" Background="{StaticResource PageBrush}" Padding="12" Margin="0,16,0,0">
+                <StackPanel>
+                    <TextBlock Text="Легенда" Style="{StaticResource FieldLabel}" Margin="0,0,0,8"/>
+                    <WrapPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,6">
+                            <Border Style="{StaticResource LegendBox}" Background="{StaticResource SeatFreeBrush}"
+                                    BorderBrush="{StaticResource SeatFreeBorderBrush}" BorderThickness="1"/>
+                            <TextBlock Text="Свободно" Style="{StaticResource LegendText}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,6">
+                            <Border Style="{StaticResource LegendBox}" Background="{StaticResource SeatSelectedBrush}"/>
+                            <TextBlock Text="Выбрано" Style="{StaticResource LegendText}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,6">
+                            <Border Style="{StaticResource LegendBox}" Background="{StaticResource SeatBookedBrush}"/>
+                            <TextBlock Text="Забронировано" Style="{StaticResource LegendText}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,6">
+                            <Border Style="{StaticResource LegendBox}" Background="{StaticResource SeatSoldBrush}"/>
+                            <TextBlock Text="Продано" Style="{StaticResource LegendText}"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </Border>
+</UserControl>
